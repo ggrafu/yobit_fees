@@ -73,9 +73,14 @@ def main():
                     writer.writerow((time.strftime('%c'), fees['in_fee'], fees['out_fee']))
                     f.flush()
                     for chat_id in subscribers:
-                        msg = u'Комиссия QIWI изменилась. Ввод: {prev_fees[in_fee]}% -> {fees[in_fee]}%,'.format(
-                            prev_fees=prev_fees, fees=fees) + \
-                              u' вывод: {prev_fees[out_fee]}% -> {fees[out_fee]}%'.format(prev_fees=prev_fees, fees=fees)
+                        if prev_fees:
+                            msg = u'Комиссия QIWI изменилась. Ввод: {prev_fees[in_fee]}% -> {fees[in_fee]}%,'.format(
+                                prev_fees=prev_fees, fees=fees) + \
+                                  u' вывод: {prev_fees[out_fee]}% -> {fees[out_fee]}%'.format(prev_fees=prev_fees,
+                                                                                              fees=fees)
+                        else:
+                            msg = u'Парсер начал работу. Начальные значения: ' + \
+                                  u'ввод:{fees[in_fee]}%, вывод:{fees[out_fee]}%'.format(fees=fees)
                         updater.bot.send_message(chat_id=chat_id, text=msg)
                 prev_fees = fees
                 time.sleep(UPDATE_INTERVAL + randint(-5, 5))
