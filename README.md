@@ -3,7 +3,8 @@
 ## Installation
 
 1. Install docker. E.g. for ubuntu: https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04
-2. Clone this repo: https://github.com/ggrafu/yobit_fees.git
+2. Clone this repo(may require to install git before):
+  git clone https://github.com/ggrafu/yobit_fees.git
 3. Build docker image: 
   docker build -t yobit_bot .
 4. Create directory to store CSV file (or use existing), e.g:
