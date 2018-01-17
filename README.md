@@ -19,6 +19,14 @@ mkdir /var/log/yobit
 ```
 docker run -d -v <the directory you've created>:/usr/src/app/export -e TELEGRAM_TOKEN=<token> --name yobit_bot yobit_bot
 ```
+6. To stop and remove container:
+```
+docker stop yobit_bot
+```
+7. To remove docker image:
+```
+docker rmi yobit_bot
+```
 
  ## Usage
  
