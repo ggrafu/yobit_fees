@@ -6,6 +6,7 @@
 2. Clone this repo(may require to install git before):
 ```
 git clone https://github.com/ggrafu/yobit_fees.git
+cd yobit_fees
 ```
 3. Build docker image: 
  ```
