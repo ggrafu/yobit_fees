@@ -109,7 +109,7 @@ def main():
                                                                                                   fees=fees)
                             else:
                                 msg = u'Парсер начал работу. Начальные значения: ' + \
-                                      u'ввод:{fees[in_fee]}%, вывод:{fees[out_fee]}%'.format(fees=fees)
+                                      u'ввод: {fees[in_fee]}%, вывод: {fees[out_fee]}%'.format(fees=fees)
                             updater.bot.send_message(chat_id=chat_id, text=msg)
                         prev_fees = fees
                     time.sleep(UPDATE_INTERVAL + randint(-5, 5))
