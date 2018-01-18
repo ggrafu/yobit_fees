@@ -25,13 +25,18 @@ def request_fees():
     in_fee = 0
     out_fee = 0
 
-    for payment in tree.xpath('//*[@id="fees_table"]/tbody')[0]:
-        name = payment[0].xpath('a//text()')
+    try:
+        for payment in tree.xpath('//*[@id="fees_table"]/tbody')[0]:
+            name = payment[0].xpath('a//text()')
 
-        if name and name[0] == 'QIWI':
-            if u'Без комиссии' not in payment[2].text:
-                in_fee = payment[2].text.split('% RUR')[0]
-                out_fee = payment[3].text.split('% RUR')[0]
+            if name and name[0] == 'QIWI':
+                if u'Без комиссии' not in payment[2].text:
+                    in_fee = payment[2].text.split('% RUR')[0]
+                    out_fee = payment[3].text.split('% RUR')[0]
+    except IndexError as ex:
+        print 'Was not able to find the datatable on page. Dropping received content to response.html', ex.message
+        with open('export/response.html', 'w') as response_html:
+            response_html.write(page.content)
 
     return {
         'in_fee': in_fee,
