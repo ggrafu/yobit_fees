@@ -6,6 +6,7 @@ import os
 import time
 from telegram.ext import Updater, CommandHandler, RegexHandler
 import csv
+import json
 
 TELEGRAM_TOKEN = os.getenv('TELEGRAM_TOKEN')
 UPDATE_INTERVAL = os.getenv('UPDATE_INTERVAL', 60)
@@ -81,6 +82,15 @@ def main():
     dp.add_error_handler(error)
 
     updater.start_polling()
+
+    try:
+        with open('subscribers.json', 'r') as subscribers_json:
+            global subscribers
+            subscribers = set(json.load(subscribers_json))
+    except (IOError, ValueError):
+        print 'No subscribers found. Starting from empty list.'
+        pass
+
     prev_fees = {}
     try:
         with open('export/output.csv', 'a') as f:
@@ -110,6 +120,8 @@ def main():
     finally:
         for chat_id in subscribers:
             updater.bot.send_message(chat_id=chat_id, text=u'Завершаю работу... До встречи!')
+        with open('subscribers.json', 'w') as subscribers_json :
+            json.dump(list(subscribers), subscribers_json)
         updater.stop()
 
 
