@@ -38,6 +38,7 @@ def request_fees():
         print 'Was not able to find the datatable on page. Dropping received content to response.html', ex.message
         with open('export/response.html', 'w') as response_html:
             response_html.write(page.content)
+        return {}
 
     return {
         'in_fee': in_fee,
