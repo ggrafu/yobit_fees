@@ -85,7 +85,7 @@ def main():
     updater.start_polling()
 
     try:
-        with open('subscribers.json', 'r') as subscribers_json:
+        with open('export/subscribers.json', 'r') as subscribers_json:
             global subscribers
             subscribers = set(json.load(subscribers_json))
     except (IOError, ValueError):
@@ -121,7 +121,7 @@ def main():
     finally:
         for chat_id in subscribers:
             updater.bot.send_message(chat_id=chat_id, text=u'Завершаю работу... До встречи!')
-        with open('subscribers.json', 'w') as subscribers_json :
+        with open('export/subscribers.json', 'w') as subscribers_json :
             json.dump(list(subscribers), subscribers_json)
         updater.stop()
 
