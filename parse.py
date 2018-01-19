@@ -113,7 +113,7 @@ def main():
                                       u'ввод: {fees[in_fee]}%, вывод: {fees[out_fee]}%'.format(fees=fees)
                             updater.bot.send_message(chat_id=chat_id, text=msg)
                         prev_fees = fees
-                    time.sleep(UPDATE_INTERVAL + randint(-int(UPDATE_INTERVAL*0.1), int(UPDATE_INTERVAL*0.1)))
+                    time.sleep(UPDATE_INTERVAL + randint(-int(int(UPDATE_INTERVAL)*0.1), int(int(UPDATE_INTERVAL)*0.1)))
             except KeyboardInterrupt:
                 f.close()
     except IOError as ex:
