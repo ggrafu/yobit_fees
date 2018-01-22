@@ -36,6 +36,7 @@ def request_fees():
             if name and name[0] == 'QIWI':
                 if u'Без комиссии' not in payment[2].text:
                     in_fee = payment[2].text.split('% RUR')[0]
+                if u'Без комиссии' not in payment[3].text:
                     out_fee = payment[3].text.split('% RUR')[0]
 
     except IndexError as ex:
