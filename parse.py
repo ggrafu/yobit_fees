@@ -7,16 +7,18 @@ import time
 from telegram.ext import Updater, CommandHandler, RegexHandler
 import csv
 import json
+import cfscrape
 
 TELEGRAM_TOKEN = os.getenv('TELEGRAM_TOKEN')
-UPDATE_INTERVAL = int(os.getenv('UPDATE_INTERVAL', 60))
+UPDATE_INTERVAL = int(os.getenv('UPDATE_INTERVAL', 180))
 
 subscribers = set()
 
 
 def request_fees():
     try:
-        page = requests.get('https://yobit.net/ru/fees/')
+        scraper = cfscrape.create_scraper()
+        page = scraper.get('https://yobit.net/ru/fees/')
     except Exception as ex:
         print 'Failed to fetch the website:', ex.message
         return {}
@@ -27,6 +29,7 @@ def request_fees():
     out_fee = 0
 
     try:
+
         for payment in tree.xpath('//*[@id="fees_table"]/tbody')[0]:
             name = payment[0].xpath('a//text()')
 
