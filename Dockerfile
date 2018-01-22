@@ -4,8 +4,8 @@ WORKDIR /usr/src/app
 
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt \
-    && sudo apt-get update \
-    && sudo apt-get install nodejs
+    && apt-get update \
+    && apt-get install nodejs -y
 
 COPY . .
 
