@@ -39,7 +39,7 @@ def request_fees():
                 if u'Без комиссии' not in payment[3].text:
                     out_fee = payment[3].text.split('% RUR')[0]
 
-    except IndexError as ex:
+    except (IndexError, TypeError) as ex:
         print 'Was not able to find the datatable on page. Dropping received content to response.html', ex.message
         with open('export/response.html', 'w') as response_html:
             response_html.write(page.content)
