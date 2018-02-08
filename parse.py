@@ -34,9 +34,9 @@ def request_fees():
             name = payment[0].xpath('a//text()')
 
             if name and name[0] == 'QIWI':
-                if u'Без комиссии' not in payment[2].text:
+                if payment[2].text and u'Без комиссии' not in payment[2].text:
                     in_fee = payment[2].text.split('% RUR')[0]
-                if u'Без комиссии' not in payment[3].text:
+                if payment[3].text and u'Без комиссии' not in payment[3].text:
                     out_fee = payment[3].text.split('% RUR')[0]
 
     except (IndexError, TypeError) as ex:
