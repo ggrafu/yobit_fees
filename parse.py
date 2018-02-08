@@ -39,13 +39,13 @@ def request_fees():
                     if u'Без комиссии' not in payment[2].text:
                         in_fee = payment[2].text.split('% RUR')[0]
                 else:
-                    in_fee = u'Нет ввода'
+                    in_fee = 'Unavailable'
 
                 if payment[3].text:
                     if u'Без комиссии' not in payment[3].text:
                         out_fee = payment[3].text.split('% RUR')[0]
                 else:
-                    out_fee = u'Нет вывода'
+                    out_fee = 'Unavailable'
 
     except (IndexError, TypeError) as ex:
         print 'Was not able to find the datatable on page. Dropping received content to response.html', ex.message
